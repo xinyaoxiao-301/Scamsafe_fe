@@ -326,4 +326,6 @@ npm run typecheck
 
 ## Maintenance note
 
-This README was rechecked against the current frontend code on `2026-05-19`. If UI copy, routes, stats, storage keys, or page ownership change, update this file to match the codebase in the same PR.
+nxmhis README was rechecked against the current frontend code on `2026-05-19`. If UI copy, routes, stats, storage keys, or page ownership change, update this file to match the codebase in the same PR.
+
+
