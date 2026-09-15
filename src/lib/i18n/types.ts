@@ -413,6 +413,7 @@ export type Strings = {
     step2Title: string
     step2Description: string
     reset: string
+    endConversation: string
     messagesLabel: string
     phoneDefaultTitle: string
     emptyState: string

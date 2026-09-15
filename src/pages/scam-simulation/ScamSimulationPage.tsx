@@ -510,6 +510,36 @@ export function ScamSimulationPage({ onBackHome }: ScamSimulationPageProps) {
     return () => window.clearTimeout(timeoutId)
   }, [isChatPopping])
 
+  // ── End conversation (shared by the goodbye phrase path and the explicit
+  // "End conversation" button, so the user is never stuck with no way to
+  // reach a report) ───────────────────────────────────────────────────────
+  const endConversationWithReport = async () => {
+    if (!scenarioType || !sessionId) return
+
+    setIsBotTyping(true)
+    try {
+      const result = await quitSimulationSession(sessionId)
+      dismissComposerFocus()
+      setAiFeedback(result.feedback)
+      setLastOutcome('safe')
+      recordPerformance(scenarioType, 'safe')
+    } catch {
+      dismissComposerFocus()
+      setAiFeedback(s.safeQuitFeedback)
+      setLastOutcome('safe')
+      recordPerformance(scenarioType, 'safe')
+    } finally {
+      setIsFinished(true)
+      setIsBotTyping(false)
+    }
+  }
+
+  const handleEndConversation = () => {
+    if (!canCompose) return
+    stopSpeechRecognition()
+    void endConversationWithReport()
+  }
+
   // ── Send message ────────────────────────────────────────────────────────────
   const sendUserMessage = async () => {
     if (!scenarioType || !sessionId || isBotTyping || isFinished) return
@@ -527,22 +557,7 @@ export function ScamSimulationPage({ onBackHome }: ScamSimulationPageProps) {
 
     // Goodbye → quit path (success)
     if (isGoodbye(text)) {
-      setIsBotTyping(true)
-      try {
-        const result = await quitSimulationSession(sessionId)
-        dismissComposerFocus()
-        setAiFeedback(result.feedback)
-        setLastOutcome('safe')
-        recordPerformance(scenarioType, 'safe')
-      } catch {
-        dismissComposerFocus()
-        setAiFeedback(s.safeQuitFeedback)
-        setLastOutcome('safe')
-        recordPerformance(scenarioType, 'safe')
-      } finally {
-        setIsFinished(true)
-        setIsBotTyping(false)
-      }
+      await endConversationWithReport()
       return
     }
 
@@ -723,6 +738,9 @@ export function ScamSimulationPage({ onBackHome }: ScamSimulationPageProps) {
             description={s.step2Description}
             footer={
               <div className="scam-simulation-page__footer-actions">
+                <Button variant="primary" onClick={handleEndConversation} disabled={!canCompose}>
+                  {s.endConversation}
+                </Button>
                 <Button variant="secondary" onClick={resetScenario} disabled={!scenarioType}>
                   {s.reset}
                 </Button>
