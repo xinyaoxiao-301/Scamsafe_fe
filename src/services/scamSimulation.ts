@@ -150,9 +150,20 @@ const GOODBYE_PHRASES: string[] = [
   'quit', 'exit', 'stop', 'cya', 'take care', 'gotta go',
 ]
 
+// A message this long is doing more than saying goodbye (e.g. agreeing to pay
+// while also signing off), so it must go through the backend classifier
+// instead of short-circuiting to the success path on a stray word match.
+const GOODBYE_WORD_LIMIT = 6
+
 export function isGoodbye(text: string): boolean {
-  const lower = text.trim().toLowerCase()
-  return GOODBYE_PHRASES.some((phrase) => lower.includes(phrase))
+  const trimmed = text.trim()
+  if (!trimmed) return false
+
+  const wordCount = trimmed.split(/\s+/).filter(Boolean).length
+  if (wordCount > GOODBYE_WORD_LIMIT) return false
+
+  const lower = trimmed.toLowerCase()
+  return GOODBYE_PHRASES.some((phrase) => new RegExp(`(^|\\s)${phrase}(\\s|$)`, 'i').test(lower))
 }
 
 // ── Performance tracking (localStorage) ──────────────────────────────────────

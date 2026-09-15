@@ -565,13 +565,15 @@ export function ScamSimulationPage({ onBackHome }: ScamSimulationPageProps) {
         setLastOutcome('safe')
         recordPerformance(scenarioType, 'safe')
         setIsFinished(true)
-      } else if (result.bot_reply) {
+      } else {
+        // An empty bot_reply means the model produced no visible reply; show the
+        // same error copy as a network failure instead of silently dropping the turn.
         setMessages((current) => [
           ...current,
           {
             id:        `bot-${Date.now()}`,
             from:      'bot',
-            text:      result.bot_reply ?? '',
+            text:      result.bot_reply || s.messageError,
             timestamp: Date.now(),
           },
         ])
