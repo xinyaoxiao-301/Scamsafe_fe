@@ -117,64 +117,61 @@ export function NotificationRevealPage({ onBackHome }: NotificationRevealPagePro
         {copy.summary ? <p className="notification-reveal-page__lede">{copy.summary}</p> : null}
       </section>
 
-      <section className="notification-reveal-page__grid">
-        <SectionCard
-          className="notification-reveal-page__card notification-reveal-page__card--observed"
-          eyebrow={s.observedEyebrow}
-          title={copy.cardDescription}
-        >
-          <div className="notification-reveal-page__summary">
-            <div className="notification-reveal-page__summary-row">
-              <strong
+      <SectionCard
+        className="notification-reveal-page__card notification-reveal-page__card--result"
+        eyebrow={s.observedEyebrow}
+        title={copy.cardDescription}
+        footer={<Button onClick={onBackHome}>{strings.common.backToHome}</Button>}
+      >
+        <div className="notification-reveal-page__result-grid">
+          <div className="notification-reveal-page__result-observed">
+            <div className="notification-reveal-page__summary">
+              <div className="notification-reveal-page__summary-row">
+                <strong
+                  className={
+                    result.isScam
+                      ? 'notification-reveal-page__verdict-pill notification-reveal-page__verdict-pill--danger'
+                      : 'notification-reveal-page__verdict-pill notification-reveal-page__verdict-pill--safe'
+                  }
+                >
+                  {copy.verdictLabel}
+                </strong>
+              </div>
+            </div>
+            <div className="notification-reveal-page__body-preview">
+              <div className="notification-reveal-page__body-topline">
+                <span className="notification-reveal-page__body-badge">{s.messageBadge}</span>
+              </div>
+              <p className="notification-reveal-page__body-text">{result.message}</p>
+              <span
                 className={
                   result.isScam
-                    ? 'notification-reveal-page__verdict-pill notification-reveal-page__verdict-pill--danger'
-                    : 'notification-reveal-page__verdict-pill notification-reveal-page__verdict-pill--safe'
+                    ? 'notification-reveal-page__body-action notification-reveal-page__body-action--danger'
+                    : 'notification-reveal-page__body-action notification-reveal-page__body-action--safe'
                 }
               >
-                {copy.verdictLabel}
-              </strong>
+                {copy.actionLabel}
+              </span>
             </div>
           </div>
-          <div className="notification-reveal-page__body-preview">
-            <div className="notification-reveal-page__body-topline">
-              <span className="notification-reveal-page__body-badge">{s.messageBadge}</span>
-            </div>
-            <p className="notification-reveal-page__body-text">{result.message}</p>
-            <span
-              className={
-                result.isScam
-                  ? 'notification-reveal-page__body-action notification-reveal-page__body-action--danger'
-                  : 'notification-reveal-page__body-action notification-reveal-page__body-action--safe'
-              }
-            >
-              {copy.actionLabel}
-            </span>
+
+          <div className="notification-reveal-page__result-reasons">
+            <p className="notification-reveal-page__result-reasons-eyebrow">{s.reasonsEyebrow}</p>
+            <h2 className="notification-reveal-page__result-reasons-title">{copy.reasonsTitle}</h2>
+            <p className="notification-reveal-page__result-reasons-description">{copy.reasonsDescription}</p>
+            <ul className="notification-reveal-page__reasons" aria-label={s.explanationsLabel}>
+              {result.explanations.map((text, index) => (
+                <li className="notification-reveal-page__reason" key={index}>
+                  <ReasonBadge tone={tone} />
+                  <div className="notification-reveal-page__reason-copy">
+                    <p>{text}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
-        </SectionCard>
-
-        <SectionCard
-          className="notification-reveal-page__card notification-reveal-page__card--reasons"
-          eyebrow={s.reasonsEyebrow}
-          title={copy.reasonsTitle}
-          description={copy.reasonsDescription}
-        >
-          <ul className="notification-reveal-page__reasons" aria-label={s.explanationsLabel}>
-            {result.explanations.map((text, index) => (
-              <li className="notification-reveal-page__reason" key={index}>
-                <ReasonBadge tone={tone} />
-                <div className="notification-reveal-page__reason-copy">
-                  <p>{text}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </SectionCard>
-      </section>
-
-      <div className="notification-reveal-page__footer">
-        <Button onClick={onBackHome}>{strings.common.backToHome}</Button>
-      </div>
+        </div>
+      </SectionCard>
     </main>
   )
 }
