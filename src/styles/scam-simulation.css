@@ -918,9 +918,11 @@
   }
 
   .scam-simulation-page__card--chat-condensed .scam-simulation-page__phone {
-    height: var(--sim-phone-height);
+    /* The scenario list on the left makes that column taller, so let the chat
+       frame grow with it instead of leaving dead space under the phone. */
+    height: 100%;
     min-height: var(--sim-phone-height);
-    max-height: var(--sim-phone-height);
+    max-height: none;
     flex: 1 1 auto;
   }
 
@@ -955,9 +957,9 @@
   }
 
   .scam-simulation-page__card--chat-condensed .scam-simulation-page__phone {
-    height: var(--sim-phone-height);
+    height: 100%;
     min-height: var(--sim-phone-height);
-    max-height: var(--sim-phone-height);
+    max-height: none;
     flex-basis: auto;
   }
 

@@ -51,11 +51,9 @@
   grid-template-rows: auto auto 1fr auto;
   align-content: start;
   min-height: 100%;
-  padding: 22px;
-  border-radius: 28px;
-  border: 1px solid rgba(19, 108, 242, 0.14);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(238, 244, 255, 0.96));
-  box-shadow: var(--shadow-card);
+  border-color: rgba(19, 108, 242, 0.14);
+  background: linear-gradient(180deg, rgba(238, 244, 255, 0.82), rgba(255, 255, 255, 0.98));
+  box-shadow: var(--shadow-soft);
 }
 
 .notification-reveal-page__card .section-card__eyebrow {
