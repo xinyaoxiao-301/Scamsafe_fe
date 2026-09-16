@@ -868,7 +868,13 @@ export function ScamSimulationPage({ onBackHome }: ScamSimulationPageProps) {
                     value={draft}
                     onChange={(e) => setDraft(e.target.value)}
                     disabled={!canCompose}
-                    onKeyDown={(e) => { if (e.key === 'Enter' && canSend) sendUserMessage() }}
+                    onKeyDown={(e) => {
+                      // Enter also commits an in-progress IME composition. Sending on
+                      // that keystroke clears the draft and the commit then writes the
+                      // text straight back into the input, so skip it while composing.
+                      if (e.nativeEvent.isComposing || e.keyCode === 229) return
+                      if (e.key === 'Enter' && canSend) sendUserMessage()
+                    }}
                   />
                   <button
                     type="button"
