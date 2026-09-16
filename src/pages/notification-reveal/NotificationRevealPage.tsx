@@ -122,7 +122,6 @@ export function NotificationRevealPage({ onBackHome }: NotificationRevealPagePro
           className="notification-reveal-page__card notification-reveal-page__card--observed"
           eyebrow={s.observedEyebrow}
           title={copy.cardDescription}
-          footer={<Button onClick={onBackHome}>{strings.common.backToHome}</Button>}
         >
           <div className="notification-reveal-page__summary">
             <div className="notification-reveal-page__summary-row">
@@ -172,6 +171,10 @@ export function NotificationRevealPage({ onBackHome }: NotificationRevealPagePro
           </ul>
         </SectionCard>
       </section>
+
+      <div className="notification-reveal-page__footer">
+        <Button onClick={onBackHome}>{strings.common.backToHome}</Button>
+      </div>
     </main>
   )
 }

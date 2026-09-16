@@ -277,6 +277,11 @@
   justify-self: start;
 }
 
+.notification-reveal-page__footer {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .notification-reveal-page__reasons {
   display: grid;
   gap: 14px;
