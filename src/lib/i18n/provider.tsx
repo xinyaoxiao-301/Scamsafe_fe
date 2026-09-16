@@ -88,11 +88,11 @@ const STRINGS: Record<Language, Strings> = {
       sourceGroupItems: [
         [
           {
-            title: 'GROQ',
+            title: 'GPT-OSS-120B',
             href: 'https://groq.com/',
             host: 'groq.com',
             badge: 'AI replies',
-            text: 'Helps ScamSafe deliver AI replies more quickly.',
+            text: 'The open-weight model, served on Groq, behind ScamSafe AI replies.',
           },
           {
             title: 'Neon',
@@ -744,11 +744,11 @@ const STRINGS: Record<Language, Strings> = {
       sourceGroupItems: [
         [
           {
-            title: 'GROQ',
+            title: 'GPT-OSS-120B',
             href: 'https://groq.com/',
             host: 'groq.com',
             badge: 'Jawapan AI',
-            text: 'Membantu ScamSafe memberi jawapan AI dengan lebih pantas.',
+            text: 'Model terbuka, dihoskan di Groq, yang menjana jawapan AI ScamSafe.',
           },
           {
             title: 'Neon',
@@ -1399,11 +1399,11 @@ const STRINGS: Record<Language, Strings> = {
       sourceGroupItems: [
         [
           {
-            title: 'GROQ',
+            title: 'GPT-OSS-120B',
             href: 'https://groq.com/',
             host: 'groq.com',
             badge: 'AI 回应',
-            text: '帮助 ScamSafe 更快给出 AI 回应。',
+            text: '由 Groq 托管的开源模型，为 ScamSafe 的 AI 回应提供支持。',
           },
           {
             title: 'Neon',
