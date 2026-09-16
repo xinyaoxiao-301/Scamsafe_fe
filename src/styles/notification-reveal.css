@@ -271,7 +271,10 @@
 }
 
 .notification-reveal-page__card .section-card__footer {
+  /* margin-top: auto pins the footer to the bottom but cancels the base
+     spacing, so restore the gap with padding. */
   margin-top: auto;
+  padding-top: 18px;
   justify-self: start;
 }
 
